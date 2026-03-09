@@ -1,7 +1,6 @@
-
 public class ContentState : BaseState<ContentState, ContentView>
 {
-    public ContentState(ContentView view) : base(view)
+    public ContentState(ContentView view, PageData data) : base(view, data)
     {
     }
 
@@ -24,16 +23,16 @@ public class ContentState : BaseState<ContentState, ContentView>
 
     protected override void OnPrevClicked()
     {
-        NavigationManager.Instance.GoTo<StartState>();
+        GoTo<StartState>();
     }
 
     protected override void OnHomeClicked()
     {
-        NavigationManager.Instance.GoTo<StartState>();
+        GoTo<StartState>();
     }
 
     protected override void OnNextClicked()
     {
-        NavigationManager.Instance.GoTo<ResultState>();
+        GoTo<ResultState>();
     }
 }

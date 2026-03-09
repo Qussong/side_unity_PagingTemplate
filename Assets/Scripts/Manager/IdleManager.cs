@@ -30,10 +30,6 @@ public class IdleManager : MonoSingleton<IdleManager>
     {
         ResetTimer();
     }
-    private void Start()
-    {
-        OnIdleTimeout += NavigationManager.Instance.GoTo<StartState>;
-    }
 
     private void Update()
     {
@@ -51,15 +47,6 @@ public class IdleManager : MonoSingleton<IdleManager>
 
         // 타임아웃 체크
         CheckTimeout();
-    }
-
-    protected override void OnSingletonApplicationQuit()
-    {
-    }
-
-    protected override void OnSingletonDestroy()
-    {
-        OnIdleTimeout -= NavigationManager.Instance.GoTo<StartState>;
     }
 
     #endregion

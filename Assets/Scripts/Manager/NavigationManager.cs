@@ -33,10 +33,9 @@ public class NavigationManager : MonoSingleton<NavigationManager>
     {
         // 초기 상태
         GoTo<StartState>();
-    }
 
-    protected override void OnSingletonApplicationQuit()
-    {
+        // 무입력 타임아웃 시 홈으로 복귀
+        IdleManager.Instance.OnIdleTimeout += HandleIdleTimeout;
     }
 
     protected override void OnSingletonDestroy()
@@ -44,6 +43,11 @@ public class NavigationManager : MonoSingleton<NavigationManager>
         if (StateMachine != null)
         {
             StateMachine.OnStateChanged -= HandleStateChanged;
+        }
+
+        if (IdleManager.HasInstance)
+        {
+            IdleManager.Instance.OnIdleTimeout -= HandleIdleTimeout;
         }
     }
 
@@ -53,9 +57,11 @@ public class NavigationManager : MonoSingleton<NavigationManager>
 
     private void RegisterState()
     {
-        StateMachine.AddState(new StartState(_startView));
-        StateMachine.AddState(new ContentState(_contentView));
-        StateMachine.AddState(new ResultState(_resultView));
+        var repo = new DataRepository();
+
+        StateMachine.AddState(new StartState(_startView, repo.GetData<StartView>()));
+        StateMachine.AddState(new ContentState(_contentView, repo.GetData<ContentView>()));
+        StateMachine.AddState(new ResultState(_resultView, repo.GetData<ResultView>()));
     }
 
     private void HandleStateChanged(IState oldState, IState newState)
@@ -65,6 +71,14 @@ public class NavigationManager : MonoSingleton<NavigationManager>
 
         // 상태 변경 시 추가 처리
 
+    }
+
+    /// <summary>
+    /// 무입력 타임아웃 발생 시 홈(StartState)으로 복귀
+    /// </summary>
+    private void HandleIdleTimeout()
+    {
+        GoTo<StartState>();
     }
 
     #endregion

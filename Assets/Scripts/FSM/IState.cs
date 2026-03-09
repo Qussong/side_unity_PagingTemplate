@@ -6,4 +6,5 @@ public interface IState
     void Enter();   // 상태 진입 시 매번 호출 (반복 플레이 시 리셋 등)
     void Update();
     void Exit();
+    void Dispose(); // 이벤트 해제 (프로그램 종료 시)
 }

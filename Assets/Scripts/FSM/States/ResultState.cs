@@ -1,7 +1,6 @@
-
 public class ResultState : BaseState<ResultState, ResultView>
 {
-    public ResultState(ResultView view) : base(view)
+    public ResultState(ResultView view, PageData data) : base(view, data)
     {
     }
 
@@ -24,11 +23,11 @@ public class ResultState : BaseState<ResultState, ResultView>
 
     protected override void OnPrevClicked()
     {
-        NavigationManager.Instance.GoTo<ContentState>();
+        GoTo<ContentState>();
     }
 
     protected override void OnHomeClicked()
     {
-        NavigationManager.Instance.GoTo<StartState>();
+        GoTo<StartState>();
     }
 }

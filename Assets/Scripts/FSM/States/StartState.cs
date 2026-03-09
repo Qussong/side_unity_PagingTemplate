@@ -1,7 +1,6 @@
-
 public class StartState : BaseState<StartState, StartView>
 {
-    public StartState(StartView view) : base(view)
+    public StartState(StartView view, PageData data) : base(view, data)
     {
     }
 
@@ -24,6 +23,6 @@ public class StartState : BaseState<StartState, StartView>
 
     protected override void OnNextClicked()
     {
-        NavigationManager.Instance.GoTo<ContentState>();
+        GoTo<ContentState>();
     }
 }

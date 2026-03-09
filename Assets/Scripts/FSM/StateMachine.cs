@@ -19,6 +19,15 @@ public class StateMachine : MonoBehaviour
         _currentState?.Update();
     }
 
+    private void OnDestroy()
+    {
+        // 모든 상태의 이벤트 구독 해제
+        foreach (var state in _states.Values)
+        {
+            state.Dispose();
+        }
+    }
+
     #endregion
 
     #region 외부 호출 함수
@@ -36,13 +45,10 @@ public class StateMachine : MonoBehaviour
     }
 
     /// <summary>
-    /// 상태 전환
+    /// 상태 전환 (비제네릭)
     /// </summary>
-    public void ChangeState<T>() where T : IState
+    public void ChangeState(Type type)
     {
-        // 제네릭 타입 T의 실제 Type 정보 획득
-        var type = typeof(T);
-
         // Dictionary에서 해당 타입의 State 검색
         if (!_states.TryGetValue(type, out IState newState))
         {
@@ -72,6 +78,11 @@ public class StateMachine : MonoBehaviour
 
         Debug.Log($"[StateMachine] {oldState?.GetType().Name ?? "None"} → {_currentState.GetType().Name}");
     }
+
+    /// <summary>
+    /// 상태 전환 (제네릭)
+    /// </summary>
+    public void ChangeState<T>() where T : IState => ChangeState(typeof(T));
 
     /// <summary>
     /// 모든 상태의 Init 추적 초기화 (콘텐츠 완전 재시작 시 사용)

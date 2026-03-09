@@ -98,10 +98,7 @@ public abstract class BaseView : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// UI 초기화 (데이터 클리어)
-    /// </summary>
-    public virtual void ResetView() { }
+
 
     #endregion
 
