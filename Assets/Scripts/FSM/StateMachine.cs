@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace PagingTemplate.FSM
+{
+
 public class StateMachine : MonoBehaviour
 {
     private IState _currentState;
@@ -116,3 +119,5 @@ public class StateMachine : MonoBehaviour
     #endregion
 
 }
+
+} // namespace PagingTemplate.FSM

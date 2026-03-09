@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+namespace PagingTemplate.Util
+{
+
 /// <summary>
 /// CSV 파일 파싱 유틸리티 (static)
 ///
@@ -74,3 +77,5 @@ public static class CSVParser
         return result;
     }
 }
+
+} // namespace PagingTemplate.Util

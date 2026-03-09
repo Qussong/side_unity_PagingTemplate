@@ -1,4 +1,10 @@
 using UnityEngine;
+using PagingTemplate.View;
+using PagingTemplate.Model;
+using PagingTemplate.Manager;
+
+namespace PagingTemplate.FSM
+{
 
 public class BaseState<TState, TView> : IState where TView : BaseView
 {
@@ -75,3 +81,5 @@ public class BaseState<TState, TView> : IState where TView : BaseView
     /// </summary>
     protected virtual void OnNextClicked() { }
 }
+
+} // namespace PagingTemplate.FSM

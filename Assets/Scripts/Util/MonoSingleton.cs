@@ -1,5 +1,8 @@
 using UnityEngine;
 
+namespace PagingTemplate.Util
+{
+
 public enum ELogType
 {
     Normal,
@@ -142,3 +145,4 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     #endregion
 }
 
+} // namespace PagingTemplate.Util

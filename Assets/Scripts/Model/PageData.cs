@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 
+namespace PagingTemplate.Model
+{
+
 /// <summary>
 /// View 하나에 대응하는 데이터 묶음
 /// CSV에서 읽어온 string key-value 쌍을 보관
@@ -49,3 +52,5 @@ public class PageData
 
     #endregion
 }
+
+} // namespace PagingTemplate.Model

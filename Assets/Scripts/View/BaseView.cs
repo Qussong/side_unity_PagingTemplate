@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace PagingTemplate.View
+{
+
 public abstract class BaseView : MonoBehaviour
 {
     [Header("=== Base View Settings ===")]
@@ -103,3 +106,5 @@ public abstract class BaseView : MonoBehaviour
     #endregion
 
 }
+
+} // namespace PagingTemplate.View

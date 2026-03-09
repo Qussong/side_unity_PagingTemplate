@@ -1,3 +1,9 @@
+using PagingTemplate.View;
+using PagingTemplate.Model;
+
+namespace PagingTemplate.FSM.States
+{
+
 public class ResultState : BaseState<ResultState, ResultView>
 {
     public ResultState(ResultView view, PageData data) : base(view, data)
@@ -31,3 +37,5 @@ public class ResultState : BaseState<ResultState, ResultView>
         GoTo<StartState>();
     }
 }
+
+} // namespace PagingTemplate.FSM.States

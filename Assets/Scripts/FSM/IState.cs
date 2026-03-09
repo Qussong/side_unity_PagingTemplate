@@ -1,4 +1,5 @@
-
+namespace PagingTemplate.FSM
+{
 
 public interface IState
 {
@@ -8,3 +9,5 @@ public interface IState
     void Exit();
     void Dispose(); // 이벤트 해제 (프로그램 종료 시)
 }
+
+} // namespace PagingTemplate.FSM

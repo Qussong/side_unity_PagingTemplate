@@ -54,17 +54,22 @@ Assets/Scripts/
 
 ## 주요 클래스
 
-| 클래스 | 설명 |
-|--------|------|
-| `MonoSingleton<T>` | DontDestroyOnLoad 적용, 앱 종료 안전 처리, OnSingletonAwake/Destroy 훅 제공 |
-| `NavigationManager` | StateMachine 생성 및 State 등록, IdleTimeout 시 StartState 복귀 |
-| `StateMachine` | 상태 등록(AddState), 전환(ChangeState), Init 최초 1회 보장 |
-| `BaseState<TState,TView>` | View 이벤트 구독, BindView() 훅, GoTo<T>() 편의 메서드 |
-| `BaseView` | Root 패널 Show/Hide, Prev/Home/Next 버튼 이벤트 발행 |
-| `DataRepository` | DataConfig.json 파싱 → CSV 파일 로드 → View 타입별 PageData 매핑 (View당 복수 CSV 지원) |
-| `PageData` | key-value 데이터 컨테이너 (Get, GetFlag, Has 제공) |
-| `CSVParser` | StreamingAssets에서 key-value CSV 파일 동기 파싱 |
-| `IdleManager` | 60초 무입력 감지, OnIdleTimeout 이벤트 발행 |
+| 네임스페이스 | 클래스 | 설명 |
+|---|---|---|
+| `Util` | `MonoSingleton<T>` | DontDestroyOnLoad 적용, 앱 종료 안전 처리, OnSingletonAwake/Destroy 훅 제공 |
+| `Util` | `CSVParser` | StreamingAssets에서 key-value CSV 파일 동기 파싱 |
+| `Manager` | `NavigationManager` | StateMachine 생성 및 State 등록, IdleTimeout 시 StartState 복귀 |
+| `Manager` | `IdleManager` | 60초 무입력 감지, OnIdleTimeout 이벤트 발행 |
+| `FSM` | `IState` | 상태 인터페이스 (Init/Enter/Update/Exit/Dispose) |
+| `FSM` | `BaseState<TState,TView>` | View 이벤트 구독, BindView() 훅, GoTo<T>() 편의 메서드 |
+| `FSM` | `StateMachine` | 상태 등록(AddState), 전환(ChangeState), Init 최초 1회 보장 |
+| `FSM.States` | `StartState` / `ContentState` / `ResultState` | 각 화면별 State 구현 (버튼 이벤트 → 상태 전환) |
+| `Model` | `DataRepository` | DataConfig.json 파싱 → CSV 파일 로드 → View 타입별 PageData 매핑 (View당 복수 CSV 지원) |
+| `Model` | `PageData` | key-value 데이터 컨테이너 (Get, GetFlag, Has 제공) |
+| `View` | `BaseView` | Root 패널 Show/Hide, Prev/Home/Next 버튼 이벤트 발행 |
+| `View` | `StartView` / `ContentView` / `ResultView` | 각 화면별 View 구현 |
+
+> 모든 네임스페이스의 루트는 `PagingTemplate` (예: `PagingTemplate.FSM.States`)
 
 ---
 
@@ -104,3 +109,4 @@ BaseState.BindView(): Presenter가 PageData → View UI에 세팅
 | 2026-03-06 | `NavigationManager` → `MonoSingleton<NavigationManager>` 적용 |
 | 2026-03-06 | `BaseState` 생성자에서 `Action<Type> goTo` 콜백 제거, `NavigationManager.Instance.GoTo<T>()` 직접 호출로 변경 |
 | 2026-03-09 | DataRepository: CSV 파일명 하드코딩 → DataConfig.json 기반 동적 로딩으로 전환 |
+| 2026-03-09 | 전체 클래스에 `PagingTemplate.*` 네임스페이스 적용 |

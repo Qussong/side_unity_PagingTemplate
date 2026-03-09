@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using PagingTemplate.Util;
+using PagingTemplate.View;
+
+namespace PagingTemplate.Model
+{
 
 /// <summary>
 /// DataConfig.json → CSV 로딩 → PageData 변환 → View 타입별 관리
@@ -75,7 +80,7 @@ public class DataRepository
         // 3. 각 ViewEntry를 순회하며 viewType 문자열 → Type 변환 후 CSV 로딩
         foreach (var entry in config.views)
         {
-            Type viewType = Type.GetType(entry.viewType);
+            Type viewType = FindType(entry.viewType);
             if (viewType == null)
             {
                 Debug.LogWarning($"[DataRepository] 타입을 찾을 수 없음: {entry.viewType}");
@@ -84,6 +89,26 @@ public class DataRepository
 
             _dataMap[viewType] = LoadPageData(entry.csvFiles);
         }
+    }
+
+    /// <summary>
+    /// 타입 이름으로 모든 로드된 어셈블리에서 타입 검색
+    /// (네임스페이스 유무와 관계없이 동작)
+    /// </summary>
+    private Type FindType(string typeName)
+    {
+        // 풀네임으로 먼저 시도
+        Type type = Type.GetType(typeName);
+        if (type != null) return type;
+
+        // 모든 어셈블리에서 검색
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            type = assembly.GetType(typeName);
+            if (type != null) return type;
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -119,3 +144,5 @@ public class DataRepository
 
     #endregion
 }
+
+} // namespace PagingTemplate.Model

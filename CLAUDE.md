@@ -20,10 +20,4 @@ Unity 키오스크용 페이징 UI 템플릿. **MVP + FSM + DataRepository** 패
 
 ---
 
-## 개선 예정 사항 (TODO)
-
-- [x] `DataRepository`: CSV 파일명 하드코딩 → `DataConfig.json` 기반으로 교체 완료
-  - View당 여러 CSV 파일 지원, 키 충돌 시 후순위 파일이 덮어씀
-  - JSON 파싱: `JsonUtility` (Unity 내장) 사용
-- [ ] `CSVParser`: 동기 파일 읽기 → 비동기(`UnityWebRequest`) 전환 검토
 

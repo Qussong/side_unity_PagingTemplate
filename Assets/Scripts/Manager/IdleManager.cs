@@ -1,5 +1,9 @@
 using System;
 using UnityEngine;
+using PagingTemplate.Util;
+
+namespace PagingTemplate.Manager
+{
 
 public class IdleManager : MonoSingleton<IdleManager>
 {
@@ -51,7 +55,7 @@ public class IdleManager : MonoSingleton<IdleManager>
 
     #endregion
 
-    #region 내부 호출 함수 
+    #region 내부 호출 함수
 
     /// <summary>
     /// 모든 종류의 입력 감지
@@ -169,3 +173,5 @@ public class IdleManager : MonoSingleton<IdleManager>
     #endregion
 
 }
+
+} // namespace PagingTemplate.Manager

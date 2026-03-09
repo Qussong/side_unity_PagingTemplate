@@ -1,4 +1,12 @@
 using UnityEngine;
+using PagingTemplate.Util;
+using PagingTemplate.FSM;
+using PagingTemplate.FSM.States;
+using PagingTemplate.Model;
+using PagingTemplate.View;
+
+namespace PagingTemplate.Manager
+{
 
 public class NavigationManager : MonoSingleton<NavigationManager>
 {
@@ -93,3 +101,5 @@ public class NavigationManager : MonoSingleton<NavigationManager>
     #endregion
 
 }
+
+} // namespace PagingTemplate.Manager

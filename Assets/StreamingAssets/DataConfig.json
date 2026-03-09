@@ -1,7 +1,7 @@
 {
   "views": [
-    { "viewType": "StartView",   "csvFiles": ["StartData.csv"] },
-    { "viewType": "ContentView", "csvFiles": ["ContentData.csv"] },
-    { "viewType": "ResultView",  "csvFiles": ["ResultData.csv"] }
+    { "viewType": "PagingTemplate.View.StartView",   "csvFiles": ["StartData.csv"] },
+    { "viewType": "PagingTemplate.View.ContentView", "csvFiles": ["ContentData.csv"] },
+    { "viewType": "PagingTemplate.View.ResultView",  "csvFiles": ["ResultData.csv"] }
   ]
 }
