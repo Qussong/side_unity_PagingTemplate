@@ -6,6 +6,8 @@ Start → Content → Result 순서로 화면을 전환하며, 무입력 시 자
 - **플랫폼**: Windows (키오스크), Android 대응 가능
 - **엔진**: Unity (단일 씬 구조)
 
+> **새 View 추가 방법** → [GUIDE_AddView.md](GUIDE_AddView.md)
+
 ---
 
 ## 아키텍처

@@ -56,9 +56,10 @@ public class NavigationManager : MonoSingleton<NavigationManager>
             StateMachine.OnStateChanged -= HandleStateChanged;
         }
 
-        if (IdleManager.HasInstance)
+        var idleManager = IdleManager.Instance;
+        if (idleManager != null)
         {
-            IdleManager.Instance.OnIdleTimeout -= HandleIdleTimeout;
+            idleManager.OnIdleTimeout -= HandleIdleTimeout;
         }
     }
 
