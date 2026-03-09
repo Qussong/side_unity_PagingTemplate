@@ -3,7 +3,7 @@
 키오스크 환경에서 사용하는 **페이징 UI 템플릿**입니다.
 Start → Content → Result 순서로 화면을 전환하며, 무입력 시 자동으로 홈(Start)으로 복귀합니다.
 
-- **플랫폼**: Windows (키오스크), Android 대응 가능
+- **플랫폼**: Windows (키오스크)
 - **엔진**: Unity (단일 씬 구조)
 
 > **새 View 추가 방법** → [GUIDE_AddView.md](GUIDE_AddView.md)
