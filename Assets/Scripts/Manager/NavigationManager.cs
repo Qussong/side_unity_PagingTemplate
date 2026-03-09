@@ -27,6 +27,9 @@ public class NavigationManager : MonoSingleton<NavigationManager>
 
     protected override void OnSingletonAwake()
     {
+        // 비활성 상태의 View를 강제 활성화 (Awake 호출 보장, _showOnAwake=false이므로 자동 Hide됨)
+        ActivateAllViews();
+
         // StateMachine 컴포넌트 추가
         StateMachine = gameObject.AddComponent<StateMachine>();
 
@@ -62,6 +65,16 @@ public class NavigationManager : MonoSingleton<NavigationManager>
     #endregion
 
     #region 내부 호출 함수
+
+    /// <summary>
+    /// 비활성 상태의 View GameObject를 강제 활성화하여 Awake() 호출을 보장
+    /// </summary>
+    private void ActivateAllViews()
+    {
+        _startView.gameObject.SetActive(true);
+        _contentView.gameObject.SetActive(true);
+        _resultView.gameObject.SetActive(true);
+    }
 
     private void RegisterState()
     {
