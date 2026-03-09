@@ -97,15 +97,6 @@ BaseState.BindView(): Presenter가 PageData → View UI에 세팅
 
 ---
 
-## 개선 예정 사항
-
-- [ ] `DataRepository`: 현재 CSV 파일명 하드코딩 → `DataConfig.json` 기반으로 교체
-  - View당 여러 CSV 파일 지원, 키 충돌 시 후순위 파일이 덮어씀
-  - JSON 파싱: `Newtonsoft.Json` (Json.NET) 사용 예정
-- [ ] `CSVParser`: 동기 파일 읽기 → 비동기(`UnityWebRequest`) 전환 검토
-
----
-
 ## 변경 이력
 
 | 날짜 | 변경 내용 |
