@@ -17,7 +17,7 @@ Start → Content → Result 순서로 화면을 전환하며, 무입력 시 자
 | **View** | UI 표시, 버튼 이벤트 발행 |
 | **State (Presenter)** | View 이벤트 수신, 데이터 바인딩, 화면 전환 결정 |
 | **StateMachine** | 상태 등록 및 전환 관리 (Init/Enter/Exit/Dispose 라이프사이클) |
-| **DataRepository** | CSV 데이터 로드 → PageData 변환 → View 타입별 제공 |
+| **DataRepository** | DataConfig.json 기반 CSV 로드 → PageData 변환 → View 타입별 제공 |
 | **NavigationManager** | 전체 오케스트레이터, StateMachine 소유, IdleManager 연동 |
 
 ---
@@ -39,7 +39,7 @@ Assets/Scripts/
 │   └── IdleManager.cs        # 무입력 타임아웃 감지 (MonoSingleton)
 ├── Model/
 │   ├── PageData.cs           # View별 CSV 데이터 컨테이너
-│   └── DataRepository.cs     # CSV 로드 및 PageData 매핑
+│   └── DataRepository.cs     # DataConfig.json 기반 CSV 로드 및 PageData 매핑
 ├── View/
 │   ├── BaseView.cs           # 뷰 베이스 (Show/Hide, 버튼 이벤트)
 │   ├── StartView.cs
@@ -61,7 +61,7 @@ Assets/Scripts/
 | `StateMachine` | 상태 등록(AddState), 전환(ChangeState), Init 최초 1회 보장 |
 | `BaseState<TState,TView>` | View 이벤트 구독, BindView() 훅, GoTo<T>() 편의 메서드 |
 | `BaseView` | Root 패널 Show/Hide, Prev/Home/Next 버튼 이벤트 발행 |
-| `DataRepository` | CSV 파일 로드 후 View 타입 → PageData 매핑 |
+| `DataRepository` | DataConfig.json 파싱 → CSV 파일 로드 → View 타입별 PageData 매핑 (View당 복수 CSV 지원) |
 | `PageData` | key-value 데이터 컨테이너 (Get, GetFlag, Has 제공) |
 | `CSVParser` | StreamingAssets에서 key-value CSV 파일 동기 파싱 |
 | `IdleManager` | 60초 무입력 감지, OnIdleTimeout 이벤트 발행 |
@@ -103,4 +103,4 @@ BaseState.BindView(): Presenter가 PageData → View UI에 세팅
 |------|-----------|
 | 2026-03-06 | `NavigationManager` → `MonoSingleton<NavigationManager>` 적용 |
 | 2026-03-06 | `BaseState` 생성자에서 `Action<Type> goTo` 콜백 제거, `NavigationManager.Instance.GoTo<T>()` 직접 호출로 변경 |
-| 2026-03-09 | README.md 분리, 글로벌 CLAUDE.md 및 write-readme Skill 추가 |
+| 2026-03-09 | DataRepository: CSV 파일명 하드코딩 → DataConfig.json 기반 동적 로딩으로 전환 |

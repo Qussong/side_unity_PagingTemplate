@@ -1,0 +1,7 @@
+{
+  "views": [
+    { "viewType": "StartView",   "csvFiles": ["StartData.csv"] },
+    { "viewType": "ContentView", "csvFiles": ["ContentData.csv"] },
+    { "viewType": "ResultView",  "csvFiles": ["ResultData.csv"] }
+  ]
+}

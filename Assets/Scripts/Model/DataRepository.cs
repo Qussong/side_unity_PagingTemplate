@@ -1,8 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 /// <summary>
-/// CSV 로딩 → PageData 변환 → View 타입별 관리
+/// DataConfig.json → CSV 로딩 → PageData 변환 → View 타입별 관리
+///
+/// DataConfig.json 형식:
+///     { "views": [
+///         { "viewType": "StartView", "csvFiles": ["StartData.csv"] },
+///         ...
+///     ]}
 ///
 /// 사용법:
 ///     var repo = new DataRepository();
@@ -11,12 +19,7 @@ using System.Collections.Generic;
 /// </summary>
 public class DataRepository
 {
-    /// <summary>
-    /// 필드
-    /// </summary>
-    private string _startDataFile = "StartData.csv";
-    private string _contentDataFile = "ContentData.csv";
-    private string _resultDataFile = "ResultData.csv";
+    private const string ConfigFileName = "DataConfig.json";
 
     // View 타입 → PageData 매핑
     private Dictionary<Type, PageData> _dataMap = new Dictionary<Type, PageData>();
@@ -26,26 +29,76 @@ public class DataRepository
         LoadAll();
     }
 
+    #region JSON 설정 모델
+
+    [Serializable]
+    private class DataConfig
+    {
+        public ViewEntry[] views;
+    }
+
+    [Serializable]
+    private class ViewEntry
+    {
+        public string viewType;
+        public string[] csvFiles;
+    }
+
+    #endregion
+
     #region 내부 호출 함수
 
     /// <summary>
-    /// 모든 View에 대응하는 CSV 로딩
+    /// DataConfig.json을 읽어 모든 View에 대응하는 CSV 로딩
     /// </summary>
     private void LoadAll()
     {
-        _dataMap[typeof(StartView)]   = LoadPageData(_startDataFile);
-        _dataMap[typeof(ContentView)] = LoadPageData(_contentDataFile);
-        _dataMap[typeof(ResultView)]  = LoadPageData(_resultDataFile);
+        // 1. StreamingAssets에서 DataConfig.json 경로 조합 및 존재 확인
+        string configPath = Path.Combine(Application.streamingAssetsPath, ConfigFileName);
+
+        if (!File.Exists(configPath))
+        {
+            Debug.LogError($"[DataRepository] 설정 파일 없음: {configPath}");
+            return;
+        }
+
+        // 2. JSON 파일 읽기 → DataConfig 객체로 역직렬화
+        string json = File.ReadAllText(configPath);
+        DataConfig config = JsonUtility.FromJson<DataConfig>(json);
+
+        if (config?.views == null)
+        {
+            Debug.LogError("[DataRepository] DataConfig.json 파싱 실패");
+            return;
+        }
+
+        // 3. 각 ViewEntry를 순회하며 viewType 문자열 → Type 변환 후 CSV 로딩
+        foreach (var entry in config.views)
+        {
+            Type viewType = Type.GetType(entry.viewType);
+            if (viewType == null)
+            {
+                Debug.LogWarning($"[DataRepository] 타입을 찾을 수 없음: {entry.viewType}");
+                continue;
+            }
+
+            _dataMap[viewType] = LoadPageData(entry.csvFiles);
+        }
     }
 
     /// <summary>
-    /// CSV 파일 → PageData 변환
+    /// 여러 CSV 파일 → PageData 변환 (후순위 파일이 키 충돌 시 덮어씀)
     /// </summary>
-    private PageData LoadPageData(string fileName)
+    private PageData LoadPageData(string[] fileNames)
     {
         var pageData = new PageData();
-        var raw = CSVParser.Read(fileName);
-        pageData.SetFromDictionary(raw);
+
+        foreach (string fileName in fileNames)
+        {
+            var raw = CSVParser.Read(fileName);
+            pageData.SetFromDictionary(raw);
+        }
+
         return pageData;
     }
 
