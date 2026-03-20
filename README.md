@@ -1,14 +1,11 @@
 # PagingTemplate
 
-키오스크 환경에서 사용하는 **페이징 UI 템플릿**입니다.
-Start → Content → Result 순서로 화면을 전환하며, 무입력 시 자동으로 홈(Start)으로 복귀합니다.
-
+키오스크 환경에서 사용하는 **페이징 UI 템플릿**입니다.</br>
+Start → Content → Result 순서로 화면을 전환하며, 무입력 시 자동으로 홈(Start)으로 복귀합니다.</br>
 - **플랫폼**: Windows (키오스크)
 - **엔진**: Unity (단일 씬 구조)
-
-> **기술 명세서** → [TECH_Spec](PORTFOLIO_SPEC.md)
-
-> **새 View 추가 방법** → [GUIDE_AddView](GUIDE_AddView.md)
+- **기술 명세서**: [TECH_Spec](PORTFOLIO_SPEC.md)
+- **새 View 추가 방법**: [GUIDE_AddView](GUIDE_AddView.md)
 
 ---
 
