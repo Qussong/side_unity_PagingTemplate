@@ -9,17 +9,12 @@
 | 플랫폼 | Windows (키오스크) |
 | 엔진 | Unity 6 / C# |
 | 구조 | 단일 씬, MVP + FSM + DataRepository |
-| 관련 링크 | [GitHub](https://github.com/kih0/side_unity_PagingTemplate) |
 
 **문서**: [포트폴리오 명세서](PORTFOLIO_SPEC.md) · [화면 추가 가이드](GUIDE_AddView.md)
 
 ---
 
 ## 화면 구성
-
-| Start | Content | Result |
-|:-----:|:-------:|:------:|
-| `[📷 이미지 배치 예정]` | `[📷 이미지 배치 예정]` | `[📷 이미지 배치 예정]` |
 
 ```
 [Start] ──Next──▶ [Content] ──Next──▶ [Result]
