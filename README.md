@@ -2,6 +2,8 @@
 
 > 키오스크 환경을 위한 페이징 UI 템플릿
 
+<img src="docs/images/PagingSample.gif" alt="PagingTemplate 예시" width="480" height="270">
+
 | 항목 | 내용 |
 |------|------|
 | 플랫폼 | Windows (키오스크) |
@@ -104,10 +106,10 @@ BaseState.BindView()     ← Presenter가 PageData → View UI에 세팅
 **DataConfig.json 예시:**
 ```json
 {
-  "items": [
-    { "viewType": "StartView",   "fileNames": ["StartData.csv"] },
-    { "viewType": "ContentView", "fileNames": ["ContentData.csv"] },
-    { "viewType": "ResultView",  "fileNames": ["ResultData.csv"] }
+  "views": [
+    { "viewType": "PagingTemplate.View.StartView",   "csvFiles": ["StartData.csv"] },
+    { "viewType": "PagingTemplate.View.ContentView", "csvFiles": ["ContentData.csv"] },
+    { "viewType": "PagingTemplate.View.ResultView",  "csvFiles": ["ResultData.csv"] }
   ]
 }
 ```
